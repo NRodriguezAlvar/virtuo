@@ -157,6 +157,26 @@ const actors = [{
   }]
 }];
 
+function getPrice(id2) {
+  var test = (cars).find(element => element.id==id2);
+  return [test.pricePerDay,test.pricePerKm]
+}
+
+function dayDiff(d1, d2)
+{
+  d1 = d1.getTime() / 86400000;
+  d2 = d2.getTime() / 86400000;
+  return new Number(d2 - d1).toFixed(0);
+}
+
+rentals.forEach(element => {
+  var returnDate = new Date(element.returnDate);
+  var pickup  = new Date(element.pickupDate)
+  var duree = parseInt(dayDiff(pickup,returnDate)) + 1;
+  
+ element.price = duree * getPrice(element.carId)[0] + element.distance * getPrice(element.carId)[1];
+});
+
 console.log(cars);
 console.log(rentals);
 console.log(actors);
