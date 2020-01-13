@@ -204,6 +204,18 @@ rentals.forEach(element => {
   element.virtuo = commission - parseFloat(element.insurance) - element.treasury;
 });
 
+//Step 4 - The famous deductible
+rentals.forEach(element => {
+  let returnDate = new Date(element.returnDate);
+  let pickup  = new Date(element.pickupDate);
+  let duree = parseInt(dayDiff(pickup,returnDate)) + 1;
+  if(element.options.deductibleReduction) 
+  {
+    element.price += duree*4;
+    element.virtuo += duree*4;
+  }
+});
+
 console.log(cars);
 console.log(rentals);
 console.log(actors);
