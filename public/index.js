@@ -193,6 +193,17 @@ rentals.forEach(element => {
 
 });
 
+//Step 3 - Give me all your money
+rentals.forEach(element => {
+  let returnDate = new Date(element.returnDate);
+  let pickup  = new Date(element.pickupDate);
+  let duree = parseInt(dayDiff(pickup,returnDate)) + 1;
+  let commission = 0.3 * element.price;
+  element.insurance = commission / 2;
+  element.treasury = duree;
+  element.virtuo = commission - parseFloat(element.insurance) - element.treasury;
+});
+
 console.log(cars);
 console.log(rentals);
 console.log(actors);
