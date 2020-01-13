@@ -216,6 +216,29 @@ rentals.forEach(element => {
   }
 });
 
+//Step 5 - Pay the actors
+function getInfo(id2) {
+  let test = (rentals).find(element => element.id==id2);
+  return [test.price,test.insurance,test.treasury,test.virtuo]
+}
+
+
+
+actors.forEach(element => {
+  element.payment.forEach(elementBis => {
+    if(elementBis.who === 'driver')
+      elementBis.amount = getInfo(element.rentalId)[0]
+    else if(elementBis.who === 'partner')
+      elementBis.amount = getInfo(element.rentalId)[1] * 2
+    else if(elementBis.who === 'insurance')
+      elementBis.amount = getInfo(element.rentalId)[1]
+    else if(elementBis.who === 'treasury')
+      elementBis.amount = getInfo(element.rentalId)[2]
+    else if (elementBis.who === 'virtuo')
+      elementBis.amount = getInfo(element.rentalId)[3]
+  })
+});
+
 console.log(cars);
 console.log(rentals);
 console.log(actors);
